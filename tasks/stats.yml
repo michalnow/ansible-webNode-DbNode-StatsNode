@@ -10,6 +10,33 @@
   yum:
     name: "{{grafana_url}}"
     state: present
+- template:
+    src: templates/grafana.ini
+    dest: /etc/grafana/grafana.ini
 - service:
     name: grafana-server
     state: restarted
+- name: Create influxdb datasource
+  grafana_datasource:
+    name: "my-influx"
+    grafana_url: "http://127.0.0.1:8080"
+    grafana_user: "admin"
+    grafana_password: "admin"
+    org_id: "1"
+    ds_type: "influxdb"
+    url: "http://localhost:8086"
+    database: "metrics"
+- copy:
+    src: dashboard/system_load.json
+    dest: /tmp/my_dashboard.json
+- name: Import Grafana dashboard foo
+  grafana_dashboard:
+    grafana_url: "http://127.0.0.1:8080"
+    grafana_user: "admin"
+    grafana_password: "admin"
+    state: present
+    message: Updated by ansible
+    overwrite: yes
+    path: /tmp/my_dashboard.json
+
+

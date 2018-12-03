@@ -5,7 +5,7 @@
    wordpress_path: /var/www/wordpress
    name_of_project: wordpress
    telegraf_url: https://dl.influxdata.com/telegraf/releases/telegraf-1.8.3-1.x86_64.rpm
-   metric_storage_ip: 172.31.23.112
+   metric_storage_ip: 172.31.24.49
   tasks:
     - include_tasks: tasks/install_wordpress.yml
 
@@ -21,6 +21,6 @@
   vars:
     grafana_url: https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.3.4-1.x86_64.rpm
     influxDb_url: https://dl.influxdata.com/influxdb/releases/influxdb-1.7.1.x86_64.rpm
-    metric_storage_ip: 172.31.23.112
+    metric_storage_ip: 172.31.24.49
   tasks:
     - include_tasks: tasks/stats.yml
